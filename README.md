@@ -10,3 +10,4 @@ POST Bonifico:
 http://localhost:8050/api/operazioni/bonifico/14537780
 
 - Lettura transazioni: Ho notato che la formattazione delle date e dei numeri a virgola mobile, correttamente restistuiti dall'api esterna, vengono restituiti dalla mia api in modo corretto ma non formattato. Ho deciso di lasciarli così in quanto come da prassi la formattazione dovrebbe avvenire lato FE.
+- N.B. il controller dovrebbe limitarsi a presentare i dati, e delegare lo strato di servizio ad eseguire la business logic. Io, visto che il codice era poco, ho preferito bypassare questo aspetto.
