@@ -1,11 +1,13 @@
 package it.fabrick.testapp.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -28,11 +30,15 @@ import it.fabrick.testapp.domain.Transazione;
 import it.fabrick.testapp.exception.AccountIdNotAllowedException;
 import it.fabrick.testapp.exception.BonificoNotFoundException;
 import it.fabrick.testapp.exception.DateFilterNotAllowedException;
+import it.fabrick.testapp.service.TransazioneService;
 
 @RestController
 @RequestMapping(value="api/operazioni")
 public class OperazioniController 
 {
+	@Autowired
+	TransazioneService transazioneService;
+	
 	private static final Logger logger = LoggerFactory.getLogger(OperazioniController.class);
 	
 	@PostMapping(value="/bonifico/{accountId}")
@@ -108,6 +114,7 @@ public class OperazioniController
 	    
 	    // recupero la lista transazioni per una eventuale gestione
 	    Set<Transazione> listaTransazioni = response.getBody().getPayload().getList();
+	    transazioneService.InsTutte(listaTransazioni);
 	    
 	    return response;
 	}
